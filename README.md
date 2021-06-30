@@ -13,6 +13,16 @@ and paste into your settings.tf
 ## Usage
 
 ```hcl
+terraform {
+  required_version = "v0.14.8"
+  required_providers {
+    opentelekomcloud = {
+      source  = "opentelekomcloud/opentelekomcloud"
+      version = "1.23.9"
+    }
+  }
+}
+
 locals {
   tenant_name = "eu-de"
   otc_domain_name="OTC-EU-DE-0000XXXXXXXXXXX"
