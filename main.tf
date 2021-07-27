@@ -18,9 +18,6 @@ resource "opentelekomcloud_obs_bucket" "tf_remote_state" {
   acl        = "private"
   region     = var.region
   versioning = true
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "opentelekomcloud_obs_bucket_policy" "only_encrypted" {
