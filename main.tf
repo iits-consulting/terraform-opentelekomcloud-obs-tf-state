@@ -21,6 +21,7 @@ resource "opentelekomcloud_obs_bucket" "tf_remote_state" {
 }
 
 resource "opentelekomcloud_obs_bucket_policy" "only_encrypted" {
+  count  = var.force_encryption ? 1 : 0
   bucket = opentelekomcloud_obs_bucket.tf_remote_state.id
   policy = jsonencode({
     Version = "2008-10-17"
