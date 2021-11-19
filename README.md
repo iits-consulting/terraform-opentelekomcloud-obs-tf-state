@@ -12,7 +12,32 @@ and paste into your settings.tf
 
 ## Usage
 
+Set your AK/SK and source such a bash file 
+
+```bash
+export STAGE_NAME=presentation
+export ACCESS_KEY="REPLACE_ME" 
+export SECRET_KEY="REPLACE_ME" 
+export AWS_SECRET_ACCESS_KEY=$SECRET_KEY 
+export AWS_ACCESS_KEY_ID=$ACCESS_KEY 
+export OS_ACCESS_KEY=$ACCESS_KEY 
+export OS_SECRET_KEY=$SECRET_KEY
+```
+
+create a folder tf-remote-state-bucket and a main.tf with this content:
+
 ```hcl
+
+terraform {
+  required_version = "v0.14.8"
+  required_providers {
+    opentelekomcloud = {
+      source  = "opentelekomcloud/opentelekomcloud"
+      version = "1.23.12"
+    }
+  }
+}
+
 locals {
   tenant_name = "eu-de"
   otc_domain_name="OTC-EU-DE-0000XXXXXXXXXXX"
@@ -27,7 +52,7 @@ provider "opentelekomcloud" {
 
 module "terraform_remote_state_bucket" {
   source  = "iits-consulting/obs-tf-state/opentelekomcloud"
-  version = "1.0.0"
+  version = "1.0.1"
   bucket_name = "tf-remote-state-${local.stage_name}"
   region = local.tenant_name
 }
